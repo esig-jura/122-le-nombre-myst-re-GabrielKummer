@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Jeu | Trouve le nombre</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h1>Trouve le nombre !</h1>
+    <div class="container">
+        <h1>Trouve le nombre mystère ! (1-100)</h1>
+
+        <form id="frmNbMystere">
+            <input id="inpUserNb" type="number" placeholder="Nombre"/>
+            <button id="btnDeviner" type="submit">Deviner</button>
+        </form>
+        <span id="txtInfoMystere">...</span>
+    </div>
     <!-- JavaScript -->
     <script src="js/deviner-nombre.js"></script>
 </body>
