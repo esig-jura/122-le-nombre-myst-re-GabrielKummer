@@ -7,12 +7,12 @@
 
 'use strict';
 
-console.log('js');
-
-let formulaire = document.getElementById('frmNbMystere');
+//let formulaire = document.getElementById('frmNbMystere');
 let saisieUtilisateur = document.getElementById('inpUserNb');
-//let boutonDeviner = document.getElementById('btnDeviner');
+let boutonDeviner = document.getElementById('btnDeviner');
 let msgInfoNbMystere = document.getElementById('txtInfoMystere');
+
+let nbEssais = 0;
 
 /**
  * Retourne un nombre entier aléatoire compris entre min et max
@@ -24,29 +24,30 @@ function tireNombre(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-formulaire.addEventListener('submit', () => {
+let nbMystere = tireNombre(0, 100);
 
-    let nbMystere = tireNombre(100, 50);
-    let nbDeviner = saisieUtilisateur.value;
+boutonDeviner.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    let nbDeviner = parseInt(saisieUtilisateur.value);
 
     console.log('Nombre mystère : ', nbMystere);
     console.log('Nombre deviné : ', nbDeviner);
 
    if (nbDeviner != null) {
-       alert(nbDeviner);
+       nbEssais++;
+       saisieUtilisateur.value = "";
+
+       if (nbDeviner === nbMystere) {
+           msgInfoNbMystere.innerText = 'Félicitation! \n Vous avez trouvez en ' + nbEssais + ' essais.';
+       }
+
        if (nbDeviner < nbMystere) {
            msgInfoNbMystere.innerText = 'Le nombre est plus grand!';
-           console.log('>');
        }
 
        if (nbDeviner > nbMystere) {
            msgInfoNbMystere.innerText = 'Le nombre est plus petit!';
-           console.log('<');
-       }
-
-       if (nbDeviner >= nbMystere) {
-           msgInfoNbMystere.innerText = 'Félicitation!';
-           console.log('=');
        }
    } else {
        alert('Saisie incorrecte!');
